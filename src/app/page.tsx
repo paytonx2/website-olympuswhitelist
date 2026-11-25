@@ -42,7 +42,12 @@ export default async function OverviewPage({ searchParams }: PageProps<"/">) {
 
       <div className="mx-auto max-w-6xl px-4">
         <div className="mt-8 space-y-3">
-          {sp.login_error && <Alert tone="error">เข้าสู่ระบบไม่สำเร็จ กรุณาลองใหม่อีกครั้ง</Alert>}
+          {sp.login_error && (
+            <Alert tone="error">
+              เข้าสู่ระบบไม่สำเร็จ — {LOGIN_ERRORS[String(sp.login_error)] ?? "กรุณาลองใหม่อีกครั้ง"}
+              <span className="ml-2 font-mono text-xs opacity-60">({String(sp.login_error)})</span>
+            </Alert>
+          )}
           {sp.denied && <Alert tone="error">คุณไม่มีสิทธิ์เข้าถึงหน้านั้น</Alert>}
           {settings.announcement && (
             <Alert tone="info">
@@ -154,6 +159,14 @@ export default async function OverviewPage({ searchParams }: PageProps<"/">) {
     </div>
   );
 }
+
+const LOGIN_ERRORS: Record<string, string> = {
+  cancelled: "คุณกดยกเลิกการอนุญาตใน Discord",
+  state: "เซสชันล็อกอินหมดอายุ กรุณากดเข้าสู่ระบบใหม่อีกครั้ง",
+  discord: "เชื่อมต่อ Discord ไม่ได้ (ตรวจ DISCORD_CLIENT_ID / DISCORD_CLIENT_SECRET / Redirect URI)",
+  database: "บันทึกข้อมูลไม่ได้ (ตรวจว่ารัน schema.sql แล้ว และคีย์ Supabase ถูกต้อง)",
+  secret: "ตั้งค่า AUTH_SECRET ไม่ถูกต้อง (ต้องยาวอย่างน้อย 32 ตัวอักษร)",
+};
 
 function Arrow() {
   return (
