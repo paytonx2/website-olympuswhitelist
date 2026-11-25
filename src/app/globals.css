@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@theme {
+  /* พาเลตหลัก: ขาวบริสุทธิ์ · ทอง · ครีม */
+  --color-bg: #fdfbf6;
+  --color-panel: #ffffff;
+  --color-panel-2: #f8f3e7;
+  --color-cream: #f3ebd8;
+  --color-line: #e8dec8;
+  --color-muted: #847a68;
+  --color-ink: #2a241b;
+  --color-gold: #a07d32;
+  --color-gold-soft: #d6bc82;
+  --color-gold-deep: #7c5f22;
+
+  --font-sans: var(--font-thai), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-cinzel), var(--font-serif-thai), serif;
+  --font-display: var(--font-cinzel), var(--font-serif-thai), serif;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  letter-spacing: 0.01em;
+}
+
+::selection {
+  background: rgb(214 188 130 / 0.45);
+}
+
+@utility card {
+  @apply rounded-2xl border border-line bg-panel shadow-[0_1px_0_rgb(255_255_255),0_8px_24px_-12px_rgb(124_95_34/0.15)];
+}
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium tracking-wide transition disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility btn-gold {
+  @apply btn bg-linear-to-b from-[#b48f42] to-gold text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.3),0_6px_16px_-8px_rgb(124_95_34/0.6)] hover:from-gold hover:to-gold-deep;
+}
+@utility btn-ghost {
+  @apply btn border border-line bg-panel text-ink hover:border-gold-soft hover:bg-panel-2;
+}
+@utility btn-danger {
+  @apply btn bg-rose-700 text-white hover:bg-rose-800;
+}
+@utility btn-success {
+  @apply btn bg-emerald-700 text-white hover:bg-emerald-800;
+}
+@utility input {
+  @apply w-full rounded-xl border border-line bg-white px-3.5 py-2.5 text-sm text-ink placeholder:text-muted/60 outline-none transition focus:border-gold-soft focus:ring-4 focus:ring-gold-soft/25;
+}
+@utility label {
+  @apply mb-1.5 block text-sm font-medium text-ink;
+}
+@utility hint {
+  @apply mt-1 text-xs text-muted;
+}
+@utility display {
+  font-family: var(--font-display);
+  letter-spacing: 0.08em;
+}
+@utility eyebrow {
+  font-family: var(--font-display);
+  @apply text-[11px] font-medium uppercase tracking-[0.35em] text-gold;
+}
+@utility gold-text {
+  @apply bg-linear-to-b from-[#c9a24e] via-gold to-gold-deep bg-clip-text text-transparent;
+}
+
+/* แถบลายกรีก (Greek key / meander) */
+@utility meander {
+  height: 14px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none' stroke='%23c4a463' stroke-width='1.4'%3E%3Cpath d='M0 19.3H20M1 19.3V1H17V15H5V5H13V11H9'/%3E%3C/svg%3E");
+  background-size: 14px 14px;
+  background-repeat: repeat-x;
+  opacity: 0.8;
+}
+
+/* พื้นหลังหินอ่อนนุ่ม ๆ */
+@utility marble {
+  background:
+    radial-gradient(900px 420px at 15% 0%, rgb(243 235 216 / 0.9), transparent 65%),
+    radial-gradient(700px 380px at 90% 10%, rgb(214 188 130 / 0.18), transparent 60%),
+    linear-gradient(180deg, #fffdf8 0%, var(--color-bg) 100%);
+}
